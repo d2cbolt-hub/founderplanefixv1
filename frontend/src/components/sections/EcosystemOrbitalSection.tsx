@@ -49,7 +49,7 @@ const EcosystemOrbitalSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-slate-950 py-28 md:py-36">
+    <section ref={sectionRef} className="relative overflow-hidden bg-slate-950 py-20 md:py-32">
       {/* Premium dark background with subtle gradients */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.08)_0%,transparent_50%)] pointer-events-none" />
       <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-indigo-500/[0.05] rounded-full blur-[120px] pointer-events-none" />
@@ -58,7 +58,7 @@ const EcosystemOrbitalSection = () => {
       <div className="container relative z-10 px-4">
         {/* Header - Keep original text */}
         <motion.div
-          className="text-center mb-16 md:mb-24"
+          className="text-center mb-12 md:mb-16 px-4"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -76,14 +76,16 @@ const EcosystemOrbitalSection = () => {
         </motion.div>
 
         {/* Dynamic Orbital Ecosystem - Solar System UI */}
-        <div className="flex justify-center mb-20">
-          <div 
-            className="relative w-full mx-auto"
-            style={{ 
-              maxWidth: '800px', 
-              aspectRatio: '1/1',
-            }}
-          >
+        {/* STRICT BOUNDING BOX - Prevents overlapping */}
+        <div 
+          className="relative mx-auto my-16 md:my-20"
+          style={{ 
+            maxWidth: '650px',
+            width: '90vw',
+            aspectRatio: '1/1',
+            margin: '60px auto',
+          }}
+        >
             {/* Container with preserved aspect ratio */}
             <div className="absolute inset-0">
               {/* EXACTLY 3 Orbital Rings - Clean and Subtle */}
