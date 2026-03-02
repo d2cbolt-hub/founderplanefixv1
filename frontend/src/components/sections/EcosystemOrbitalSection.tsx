@@ -209,36 +209,45 @@ const EcosystemOrbitalSection = () => {
 
           {/* OUTER RING ORBITS - ScaleRunway, BoltRunway (60s) */}
           {/* ScaleRunway - 45° */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%] rotate-[45deg]">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%]">
+            {/* 1. The Track: Infinite forward spin */}
             <div className="absolute inset-0 animate-[spin_60s_linear_infinite]">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="animate-[reverse-spin_60s_linear_infinite] -rotate-[45deg]">
-                  <div 
-                    className="flex flex-col items-center gap-2 cursor-pointer"
-                    onMouseEnter={() => setHoveredNode('ScaleRunway')}
-                    onMouseLeave={() => setHoveredNode(null)}
-                  >
-                    <div 
-                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        hoveredNode === 'ScaleRunway' 
-                          ? 'scale-125 shadow-[0_0_45px_rgba(234,161,64,0.95)]' 
-                          : 'shadow-[0_0_30px_rgba(234,161,64,0.6)]'
-                      }`}
-                      style={{ 
-                        backgroundColor: '#EAA140',
-                        border: hoveredNode === 'ScaleRunway' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
-                      }}
-                    >
-                      <Settings className="text-white w-7 h-7" strokeWidth={1.8} />
+              {/* 2. The Spoke: Static starting angle (45°) */}
+              <div className="absolute inset-0 rotate-[45deg]">
+                {/* 3. Node Placement: At top edge */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  {/* 4. Counter-Spoke: Opposite static rotation (-45°) - THE GYROSCOPE */}
+                  <div className="-rotate-[45deg]">
+                    {/* 5. Counter-Spin: Infinite reverse animation */}
+                    <div className="animate-[reverse-spin_60s_linear_infinite]">
+                      <div 
+                        className="flex flex-col items-center gap-2 cursor-pointer"
+                        onMouseEnter={() => setHoveredNode('ScaleRunway')}
+                        onMouseLeave={() => setHoveredNode(null)}
+                      >
+                        <div 
+                          className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                            hoveredNode === 'ScaleRunway' 
+                              ? 'scale-125 shadow-[0_0_45px_rgba(234,161,64,0.95)]' 
+                              : 'shadow-[0_0_30px_rgba(234,161,64,0.6)]'
+                          }`}
+                          style={{ 
+                            backgroundColor: '#EAA140',
+                            border: hoveredNode === 'ScaleRunway' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
+                          }}
+                        >
+                          <Settings className="text-white w-7 h-7" strokeWidth={1.8} />
+                        </div>
+                        <p 
+                          className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
+                            hoveredNode === 'ScaleRunway' ? 'text-[#EAA140]' : 'text-slate-200/80'
+                          }`}
+                          style={{ textShadow: hoveredNode === 'ScaleRunway' ? '0 0 12px rgba(234,161,64,0.5)' : 'none' }}
+                        >
+                          ScaleRunway
+                        </p>
+                      </div>
                     </div>
-                    <p 
-                      className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
-                        hoveredNode === 'ScaleRunway' ? 'text-[#EAA140]' : 'text-slate-200/80'
-                      }`}
-                      style={{ textShadow: hoveredNode === 'ScaleRunway' ? '0 0 12px rgba(234,161,64,0.5)' : 'none' }}
-                    >
-                      ScaleRunway
-                    </p>
                   </div>
                 </div>
               </div>
@@ -246,36 +255,45 @@ const EcosystemOrbitalSection = () => {
           </div>
 
           {/* BoltRunway - 225° */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%] rotate-[225deg]">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%]">
+            {/* 1. The Track: Infinite forward spin */}
             <div className="absolute inset-0 animate-[spin_60s_linear_infinite]">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="animate-[reverse-spin_60s_linear_infinite] -rotate-[225deg]">
-                  <div 
-                    className="flex flex-col items-center gap-2 cursor-pointer"
-                    onMouseEnter={() => setHoveredNode('BoltRunway')}
-                    onMouseLeave={() => setHoveredNode(null)}
-                  >
-                    <div 
-                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        hoveredNode === 'BoltRunway' 
-                          ? 'scale-125 shadow-[0_0_45px_rgba(193,40,59,0.95)]' 
-                          : 'shadow-[0_0_30px_rgba(193,40,59,0.6)]'
-                      }`}
-                      style={{ 
-                        backgroundColor: '#C1283B',
-                        border: hoveredNode === 'BoltRunway' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
-                      }}
-                    >
-                      <Shield className="text-white w-7 h-7" strokeWidth={1.8} />
+              {/* 2. The Spoke: Static starting angle (225°) */}
+              <div className="absolute inset-0 rotate-[225deg]">
+                {/* 3. Node Placement: At top edge */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  {/* 4. Counter-Spoke: Opposite static rotation (-225°) - THE GYROSCOPE */}
+                  <div className="-rotate-[225deg]">
+                    {/* 5. Counter-Spin: Infinite reverse animation */}
+                    <div className="animate-[reverse-spin_60s_linear_infinite]">
+                      <div 
+                        className="flex flex-col items-center gap-2 cursor-pointer"
+                        onMouseEnter={() => setHoveredNode('BoltRunway')}
+                        onMouseLeave={() => setHoveredNode(null)}
+                      >
+                        <div 
+                          className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                            hoveredNode === 'BoltRunway' 
+                              ? 'scale-125 shadow-[0_0_45px_rgba(193,40,59,0.95)]' 
+                              : 'shadow-[0_0_30px_rgba(193,40,59,0.6)]'
+                          }`}
+                          style={{ 
+                            backgroundColor: '#C1283B',
+                            border: hoveredNode === 'BoltRunway' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
+                          }}
+                        >
+                          <Shield className="text-white w-7 h-7" strokeWidth={1.8} />
+                        </div>
+                        <p 
+                          className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
+                            hoveredNode === 'BoltRunway' ? 'text-[#C1283B]' : 'text-slate-200/80'
+                          }`}
+                          style={{ textShadow: hoveredNode === 'BoltRunway' ? '0 0 12px rgba(193,40,59,0.5)' : 'none' }}
+                        >
+                          BoltRunway
+                        </p>
+                      </div>
                     </div>
-                    <p 
-                      className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
-                        hoveredNode === 'BoltRunway' ? 'text-[#C1283B]' : 'text-slate-200/80'
-                      }`}
-                      style={{ textShadow: hoveredNode === 'BoltRunway' ? '0 0 12px rgba(193,40,59,0.5)' : 'none' }}
-                    >
-                      BoltRunway
-                    </p>
                   </div>
                 </div>
               </div>
