@@ -76,51 +76,52 @@ const EcosystemOrbitalSection = () => {
         </motion.div>
 
         {/* Dynamic Orbital Ecosystem - Solar System UI */}
-        {/* STRICT BOUNDING BOX - Prevents overlapping */}
+        {/* STRICT BOUNDING BOX - Fixed to prevent overlapping */}
         <div 
-          className="relative mx-auto my-16 md:my-20"
+          className="relative mx-auto"
           style={{ 
-            maxWidth: '650px',
+            maxWidth: '550px',
             width: '90vw',
             aspectRatio: '1/1',
-            margin: '60px auto',
+            marginTop: '80px',
+            marginBottom: '80px',
           }}
         >
-          {/* Inner Container with padding - All orbital elements must stay within this */}
+          {/* Inner Container with padding - All orbital elements MUST stay within this */}
           <div className="absolute inset-0" style={{ padding: '5%' }}>
-            {/* THE TRACKS: EXACTLY 3 Faint Orbital Rings - Fully contained */}
-            {/* Ring 1 (Inner - 28%): BoltGuider */}
+            {/* THE TRACKS: EXACTLY 3 Orbital Rings - ALL FIT INSIDE 100% */}
+            {/* Ring 1 (Inner - 15%): BoltGuider */}
             <div
               className="absolute rounded-full pointer-events-none"
               style={{
                 top: '50%',
                 left: '50%',
-                width: '56%',
-                height: '56%',
+                width: '30%',
+                height: '30%',
                 transform: 'translate(-50%, -50%)',
                 border: '1px dashed rgba(148, 163, 184, 0.12)',
               }}
             />
-            {/* Ring 2 (Middle - 48%): BrandToFly, D2CBolt, B2BBolt */}
+            {/* Ring 2 (Middle - 30%): BrandToFly, D2CBolt, B2BBolt */}
             <div
               className="absolute rounded-full pointer-events-none"
               style={{
                 top: '50%',
                 left: '50%',
-                width: '96%',
-                height: '96%',
+                width: '60%',
+                height: '60%',
                 transform: 'translate(-50%, -50%)',
                 border: '1px dashed rgba(148, 163, 184, 0.1)',
               }}
             />
-            {/* Ring 3 (Outer - 68%): ScaleRunway, BoltRunway */}
+            {/* Ring 3 (Outer - 45%): ScaleRunway, BoltRunway */}
             <div
               className="absolute rounded-full pointer-events-none"
               style={{
                 top: '50%',
                 left: '50%',
-                width: '136%',
-                height: '136%',
+                width: '90%',
+                height: '90%',
                 transform: 'translate(-50%, -50%)',
                 border: '1px dashed rgba(148, 163, 184, 0.08)',
               }}
