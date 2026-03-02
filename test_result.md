@@ -101,3 +101,87 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Massive structural and copy update to Homepage per official specification PDF. Batch 1: Remove splash screen, update Section 1 (Hero), Section 5 (Arsenal), Section 8 (Final CTA) copy."
+
+backend:
+  - task: "Backend API endpoints (leads, analytics, admin, AI assessment)"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "No backend changes needed for Batch 1 — all frontend copy updates"
+
+frontend:
+  - task: "Remove Splash Screen"
+    implemented: true
+    working: true
+    file: "frontend/src/App.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Removed SplashScreen import, state, and conditional rendering. Users land directly on Hero."
+
+  - task: "Section 1 Hero Copy Update"
+    implemented: true
+    working: true
+    file: "frontend/src/components/sections/HeroSection.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Updated eyebrow, headline, sub-headline, CTA text. Verified via screenshots."
+
+  - task: "Section 5 Arsenal Copy Update"
+    implemented: true
+    working: true
+    file: "frontend/src/components/sections/EcosystemSection.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Updated all 6 engine cards with new taglines, descriptions, badges. Headline updated."
+
+  - task: "Section 8 Final CTA Copy Update"
+    implemented: true
+    working: true
+    file: "frontend/src/components/sections/HomepageFooter.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Updated to 'Stop Guessing. Start Engineering.' with diagnostic CTA button. Wired to open Stage Clarity Check."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Remove Splash Screen"
+    - "Section 1 Hero Copy Update"
+    - "Section 5 Arsenal Copy Update"
+    - "Section 8 Final CTA Copy Update"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Batch 1 complete: Splash screen removed, Sections 1/5/8 copy updated per spec PDF. All verified via screenshots. Next: Sections 2/3/4 layout updates, then Header, then new Ecosystem/FAQ sections."
