@@ -177,10 +177,51 @@ const EcosystemOrbitalSection = () => {
                   })}
                 </svg>
 
+                {/* Connection Lines from Center to Nodes */}
+                <svg 
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  style={{ overflow: 'visible' }}
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="xMidYMid meet"
+                >
+                  <defs>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  
+                  {engines.map((engine, index) => {
+                    const orbitRadius = engine.orbit === 1 ? 30 : engine.orbit === 2 ? 50 : 68;
+                    const pos = getOrbitalPosition(engine.angle, orbitRadius);
+                    const isHovered = hoveredNode === index;
+
+                    return (
+                      <line
+                        key={`line-${index}`}
+                        x1="50"
+                        y1="50"
+                        x2={pos.x}
+                        y2={pos.y}
+                        stroke={isHovered ? engine.color : 'rgba(148, 163, 184, 0.15)'}
+                        strokeWidth={isHovered ? '0.4' : '0.15'}
+                        style={{
+                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                          filter: isHovered ? 'url(#glow)' : 'none',
+                          opacity: isHovered ? 1 : 0.5,
+                        }}
+                      />
+                    );
+                  })}
+                </svg>
+
                 {/* Engine Nodes - Counter-rotating to stay upright */}
                 {engines.map((engine, index) => {
                   const Icon = engine.icon;
-                  const orbitRadius = engine.orbit === 1 ? 33 : engine.orbit === 2 ? 50 : 67;
+                  const orbitRadius = engine.orbit === 1 ? 30 : engine.orbit === 2 ? 50 : 68;
                   const pos = getOrbitalPosition(engine.angle, orbitRadius);
                   const isHovered = hoveredNode === index;
 
@@ -191,23 +232,21 @@ const EcosystemOrbitalSection = () => {
                       style={{
                         left: `${pos.x}%`,
                         top: `${pos.y}%`,
-                        transform: 'translate(-50%, -50%)',
                       }}
-                      initial={{ scale: 0, opacity: 0 }}
+                      initial={{ scale: 0, opacity: 0, x: '-50%', y: '-50%' }}
                       animate={
                         hasAnimated 
                           ? { 
                               scale: 1, 
                               opacity: 1,
-                              // Counter-rotation to keep text upright
-                              rotate: isRotationPaused ? 0 : -360,
+                              x: '-50%',
+                              y: '-50%',
                             } 
-                          : { scale: 0, opacity: 0 }
+                          : { scale: 0, opacity: 0, x: '-50%', y: '-50%' }
                       }
                       transition={{
                         scale: { duration: 0.5, delay: 0.3 + index * 0.08, type: "spring", stiffness: 200 },
                         opacity: { duration: 0.5, delay: 0.3 + index * 0.08 },
-                        rotate: { duration: 60, repeat: Infinity, ease: "linear" },
                       }}
                       onMouseEnter={() => {
                         setHoveredNode(index);
@@ -218,6 +257,15 @@ const EcosystemOrbitalSection = () => {
                         setIsRotationPaused(false);
                       }}
                     >
+                      {/* Counter-rotation wrapper - this cancels out parent rotation */}
+                      <motion.div
+                        animate={isRotationPaused ? {} : { rotate: -360 }}
+                        transition={{
+                          duration: 60,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                      >
                       <div className="flex flex-col items-center cursor-pointer group">
                         {/* Node Circle */}
                         <motion.div
