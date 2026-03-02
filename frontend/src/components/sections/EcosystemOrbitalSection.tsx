@@ -86,6 +86,44 @@ const EcosystemOrbitalSection = () => {
           >
             {/* Container with preserved aspect ratio */}
             <div className="absolute inset-0">
+              {/* EXACTLY 3 Orbital Rings - Clean and Subtle */}
+              {/* Ring 1 (Inner - 30%): BoltGuider */}
+              {/* Ring 2 (Middle - 50%): BrandToFly, D2CBolt, B2BBolt */}
+              {/* Ring 3 (Outer - 68%): ScaleRunway, BoltRunway */}
+              <div
+                className="absolute rounded-full pointer-events-none"
+                style={{
+                  top: '50%',
+                  left: '50%',
+                  width: '60%',
+                  height: '60%',
+                  transform: 'translate(-50%, -50%)',
+                  border: '1px dashed rgba(255, 255, 255, 0.1)',
+                }}
+              />
+              <div
+                className="absolute rounded-full pointer-events-none"
+                style={{
+                  top: '50%',
+                  left: '50%',
+                  width: '100%',
+                  height: '100%',
+                  transform: 'translate(-50%, -50%)',
+                  border: '1px dashed rgba(255, 255, 255, 0.1)',
+                }}
+              />
+              <div
+                className="absolute rounded-full pointer-events-none"
+                style={{
+                  top: '50%',
+                  left: '50%',
+                  width: '136%',
+                  height: '136%',
+                  transform: 'translate(-50%, -50%)',
+                  border: '1px dashed rgba(255, 255, 255, 0.1)',
+                }}
+              />
+
               {/* Rotating Track System */}
               <motion.div
                 className="absolute inset-0"
@@ -97,24 +135,6 @@ const EcosystemOrbitalSection = () => {
                 }}
                 style={{ transformOrigin: "center center" }}
               >
-                {/* Orbital Rings - 3 concentric circles */}
-                {[33, 50, 67].map((radius, index) => (
-                  <div
-                    key={`ring-${index}`}
-                    className="absolute rounded-full"
-                    style={{
-                      top: '50%',
-                      left: '50%',
-                      width: `${radius * 2}%`,
-                      height: `${radius * 2}%`,
-                      transform: 'translate(-50%, -50%)',
-                      border: '1px dashed rgba(148, 163, 184, 0.25)',
-                      boxShadow: index === 0 
-                        ? '0 0 20px rgba(99, 102, 241, 0.1)' 
-                        : '0 0 15px rgba(99, 102, 241, 0.05)',
-                    }}
-                  />
-                ))}
 
                 {/* Connection Lines from Center to Nodes */}
                 <svg 
