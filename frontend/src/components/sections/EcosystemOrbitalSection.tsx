@@ -228,7 +228,7 @@ const EcosystemOrbitalSection = () => {
                       <motion.div
                         animate={isRotationPaused ? {} : { rotate: -360 }}
                         transition={{
-                          duration: 60,
+                          duration: 45,
                           repeat: Infinity,
                           ease: "linear",
                         }}
