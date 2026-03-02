@@ -234,44 +234,64 @@ const EcosystemOrbitalSection = () => {
                         }}
                       >
                         <div className="flex flex-col items-center cursor-pointer group">
-                          {/* Node Circle */}
+                          {/* Node Circle - Enhanced */}
                           <motion.div
                             className="rounded-full flex items-center justify-center relative"
-                            animate={isHovered ? { scale: 1.15 } : { scale: 1 }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            animate={isHovered ? { scale: 1.2, rotate: [0, 360] } : { scale: 1 }}
+                            transition={{ 
+                              scale: { duration: 0.4, ease: "easeOut" },
+                              rotate: { duration: 15, repeat: Infinity, ease: "linear" }
+                            }}
                             style={{
-                              width: engine.orbit === 1 ? '56px' : engine.orbit === 2 ? '52px' : '48px',
-                              height: engine.orbit === 1 ? '56px' : engine.orbit === 2 ? '52px' : '48px',
+                              width: engine.orbit === 1 ? '58px' : engine.orbit === 2 ? '54px' : '50px',
+                              height: engine.orbit === 1 ? '58px' : engine.orbit === 2 ? '54px' : '50px',
                               backgroundColor: engine.color,
                               boxShadow: isHovered
-                                ? `0 0 30px ${engine.color}80, 0 0 60px ${engine.color}40, 0 8px 32px -4px ${engine.color}60`
-                                : `0 0 20px ${engine.color}40, 0 4px 16px -4px ${engine.color}30`,
-                              border: isHovered ? `2px solid ${engine.color}` : '2px solid rgba(255, 255, 255, 0.1)',
+                                ? `0 0 40px ${engine.color}90, 0 0 80px ${engine.color}50, 0 10px 40px -4px ${engine.color}70, inset 0 2px 8px rgba(255, 255, 255, 0.2)`
+                                : `0 0 25px ${engine.color}50, 0 6px 20px -4px ${engine.color}40`,
+                              border: isHovered ? `3px solid rgba(255, 255, 255, 0.4)` : '2px solid rgba(255, 255, 255, 0.15)',
                             }}
                           >
-                            {/* Pulsating glow effect on hover */}
+                            {/* Enhanced pulsating glow effect on hover */}
                             {isHovered && (
-                              <motion.div
-                                className="absolute inset-0 rounded-full"
-                                style={{ backgroundColor: engine.color }}
-                                animate={{
-                                  scale: [1, 1.4, 1],
-                                  opacity: [0.3, 0, 0.3],
-                                }}
-                                transition={{
-                                  duration: 2,
-                                  repeat: Infinity,
-                                  ease: "easeInOut",
-                                }}
-                              />
+                              <>
+                                <motion.div
+                                  className="absolute inset-0 rounded-full"
+                                  style={{ backgroundColor: engine.color }}
+                                  animate={{
+                                    scale: [1, 1.5, 1],
+                                    opacity: [0.4, 0, 0.4],
+                                  }}
+                                  transition={{
+                                    duration: 1.5,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                  }}
+                                />
+                                <motion.div
+                                  className="absolute inset-0 rounded-full"
+                                  style={{ backgroundColor: engine.color }}
+                                  animate={{
+                                    scale: [1, 1.8, 1],
+                                    opacity: [0.2, 0, 0.2],
+                                  }}
+                                  transition={{
+                                    duration: 1.5,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                    delay: 0.3,
+                                  }}
+                                />
+                              </>
                             )}
                             <Icon 
                               className="text-white relative z-10" 
                               style={{ 
-                                width: engine.orbit === 1 ? '26px' : '24px', 
-                                height: engine.orbit === 1 ? '26px' : '24px' 
+                                width: engine.orbit === 1 ? '28px' : '26px', 
+                                height: engine.orbit === 1 ? '28px' : '26px',
+                                filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))'
                               }} 
-                              strokeWidth={1.5} 
+                              strokeWidth={1.8} 
                             />
                           </motion.div>
 
