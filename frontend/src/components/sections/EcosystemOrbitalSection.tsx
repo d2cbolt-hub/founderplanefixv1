@@ -1,395 +1,285 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState } from "react";
 import { Compass, Palette, Zap, Shield, Settings } from "lucide-react";
 import founderplaneLogo from "@/assets/founderplane-logo-new.png";
 
-interface Engine {
-  name: string;
-  label: string;
-  icon: typeof Compass;
-  color: string;
-  orbit: number;
-  angle: number;
-}
-
-const engines: Engine[] = [
-  { name: "BoltGuider", label: "Validation Engine", icon: Compass, color: "#2C5AF6", orbit: 1, angle: 0 },
-  { name: "BrandToFly", label: "Identity Engine", icon: Palette, color: "#661AF5", orbit: 2, angle: 0 },
-  { name: "D2CBolt", label: "D2C Commerce Engine", icon: Zap, color: "#52A65B", orbit: 2, angle: 120 },
-  { name: "B2BBolt", label: "B2B Revenue Engine", icon: Zap, color: "#E5572E", orbit: 2, angle: 240 },
-  { name: "ScaleRunway", label: "Operations Engine", icon: Settings, color: "#EAA140", orbit: 3, angle: 45 },
-  { name: "BoltRunway", label: "Strategic Scale Engine", icon: Shield, color: "#C1283B", orbit: 3, angle: 225 },
-];
-
 const EcosystemOrbitalSection = () => {
-  const [hoveredNode, setHoveredNode] = useState<number | null>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
-
-  useEffect(() => {
-    if (isInView && !hasAnimated) {
-      const timer = setTimeout(() => setHasAnimated(true), 200);
-      return () => clearTimeout(timer);
-    }
-  }, [isInView, hasAnimated]);
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-slate-950 py-20 md:py-32">
+    <section className="relative overflow-hidden bg-slate-950 py-20 md:py-32">
+      {/* Background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.08)_0%,transparent_50%)] pointer-events-none" />
-      <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-indigo-500/[0.05] rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-violet-500/[0.05] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container relative z-10 px-4">
-        <motion.div
-          className="text-center mb-12 md:mb-16 px-4"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-16 px-4">
           <span className="inline-block text-indigo-400 font-semibold text-sm tracking-wider uppercase mb-4">
             The Ecosystem
           </span>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold font-display text-white mb-5">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-5">
             One Central Hub. Six Specialized Engines.
           </h2>
           <p className="text-slate-400 max-w-[720px] mx-auto text-base md:text-lg leading-relaxed">
             FounderPlane operates as a unified architectural system. We are not a fragmented agency. We are your core operating system, allowing you to plug in the exact sub-brand engine you need, exactly when your stage requires it.
           </p>
-        </motion.div>
+        </div>
 
-        <div 
-          className="relative mx-auto"
-          style={{ 
-            position: 'relative',
-            width: '100%',
-            maxWidth: '550px',
-            aspectRatio: '1 / 1',
-            margin: '80px auto',
-          }}
-        >
-          <div className="absolute inset-0" style={{ padding: '5%' }}>
-            {/* Ring 1 (Inner - 45%): BoltGuider */}
-            <div 
-              className="orbit-ring"
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                width: '45%',
-                height: '45%',
-                borderRadius: '50%',
-                border: '1.5px solid rgba(99, 102, 241, 0.4)',
-                boxShadow: '0 0 15px rgba(99, 102, 241, 0.2), inset 0 0 15px rgba(99, 102, 241, 0.1)',
-                animation: 'spin 45s linear infinite',
-              }}
-            >
-              {engines.filter(e => e.orbit === 1).map((engine, idx) => {
-                const Icon = engine.icon;
-                const isHovered = hoveredNode === engines.indexOf(engine);
-                return (
-                  <div
-                    key={engine.name}
-                    className="planet-node"
-                    style={{
-                      position: 'absolute',
-                      top: '0',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      animation: 'reverse-spin 45s linear infinite',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      gap: '8px',
-                    }}
-                    onMouseEnter={() => setHoveredNode(engines.indexOf(engine))}
+        {/* MASTER CONTAINER - Strict Bounding Box */}
+        <div className="relative w-full max-w-[550px] aspect-square mx-auto my-20">
+          
+          {/* 3 ORBITAL TRACKS - Static Concentric Circles */}
+          {/* Inner Ring - 45% */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45%] h-[45%] rounded-full border-[1.5px] border-indigo-500/40 shadow-[0_0_15px_rgba(99,102,241,0.2),inset_0_0_15px_rgba(99,102,241,0.1)]" />
+          
+          {/* Middle Ring - 70% */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full border-[1.5px] border-indigo-500/35 shadow-[0_0_20px_rgba(99,102,241,0.15),inset_0_0_20px_rgba(99,102,241,0.08)]" />
+          
+          {/* Outer Ring - 95% */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%] rounded-full border-[1.5px] border-indigo-500/30 shadow-[0_0_25px_rgba(99,102,241,0.12),inset_0_0_25px_rgba(99,102,241,0.06)]" />
+
+          {/* INNER RING ORBITS - BoltGuider (40s) */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45%] h-[45%]">
+            {/* Wrapper 1: Track Spin */}
+            <div className="absolute inset-0 animate-[spin_40s_linear_infinite]">
+              {/* Node at top edge */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                {/* Wrapper 2: Counter-Spin */}
+                <div className="animate-[reverse-spin_40s_linear_infinite]">
+                  <div 
+                    className="flex flex-col items-center gap-2 cursor-pointer"
+                    onMouseEnter={() => setHoveredNode('BoltGuider')}
                     onMouseLeave={() => setHoveredNode(null)}
                   >
-                    <div
-                      className="icon-circle"
-                      style={{
-                        width: '56px',
-                        height: '56px',
-                        borderRadius: '50%',
-                        backgroundColor: engine.color,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        border: isHovered ? '3px solid rgba(255, 255, 255, 0.5)' : '2px solid rgba(255, 255, 255, 0.2)',
-                        boxShadow: isHovered
-                          ? `0 0 45px ${engine.color}95, 0 0 90px ${engine.color}60`
-                          : `0 0 30px ${engine.color}60`,
-                        transform: isHovered ? 'scale(1.25)' : 'scale(1)',
-                        transition: 'all 0.4s ease',
+                    <div 
+                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        hoveredNode === 'BoltGuider' 
+                          ? 'scale-125 shadow-[0_0_45px_rgba(44,90,246,0.95)]' 
+                          : 'shadow-[0_0_30px_rgba(44,90,246,0.6)]'
+                      }`}
+                      style={{ 
+                        backgroundColor: '#2C5AF6',
+                        border: hoveredNode === 'BoltGuider' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
                       }}
                     >
-                      <Icon className="text-white" style={{ width: '28px', height: '28px' }} strokeWidth={1.8} />
+                      <Compass className="text-white w-7 h-7" strokeWidth={1.8} />
                     </div>
                     <p 
-                      className="text-label"
-                      style={{
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        color: isHovered ? engine.color : 'rgba(226, 232, 240, 0.8)',
-                        textShadow: isHovered ? `0 0 12px ${engine.color}50` : 'none',
-                        whiteSpace: 'nowrap',
-                        margin: 0,
-                        transition: 'all 0.3s ease',
-                      }}
+                      className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
+                        hoveredNode === 'BoltGuider' ? 'text-[#2C5AF6]' : 'text-slate-200/80'
+                      }`}
+                      style={{ textShadow: hoveredNode === 'BoltGuider' ? '0 0 12px rgba(44,90,246,0.5)' : 'none' }}
                     >
-                      {engine.name}
+                      BoltGuider
                     </p>
                   </div>
-                );
-              })}
-            </div>
-
-            {/* Ring 2 (Middle - 70%): BrandToFly, D2CBolt, B2BBolt */}
-            <div 
-              className="orbit-ring"
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                width: '70%',
-                height: '70%',
-                borderRadius: '50%',
-                border: '1.5px solid rgba(99, 102, 241, 0.35)',
-                boxShadow: '0 0 20px rgba(99, 102, 241, 0.15), inset 0 0 20px rgba(99, 102, 241, 0.08)',
-                animation: 'spin 55s linear infinite',
-              }}
-            >
-              {engines.filter(e => e.orbit === 2).map((engine) => {
-                const Icon = engine.icon;
-                const isHovered = hoveredNode === engines.indexOf(engine);
-                const angleOffset = engine.angle;
-                return (
-                  <div
-                    key={engine.name}
-                    className="planet-node"
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: `translate(-50%, -50%) rotate(${angleOffset}deg) translateY(-50%)`,
-                      animation: 'reverse-spin 55s linear infinite',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      gap: '8px',
-                    }}
-                    onMouseEnter={() => setHoveredNode(engines.indexOf(engine))}
-                    onMouseLeave={() => setHoveredNode(null)}
-                  >
-                    <div
-                      className="icon-circle"
-                      style={{
-                        width: '56px',
-                        height: '56px',
-                        borderRadius: '50%',
-                        backgroundColor: engine.color,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        border: isHovered ? '3px solid rgba(255, 255, 255, 0.5)' : '2px solid rgba(255, 255, 255, 0.2)',
-                        boxShadow: isHovered
-                          ? `0 0 45px ${engine.color}95, 0 0 90px ${engine.color}60`
-                          : `0 0 30px ${engine.color}60`,
-                        transform: isHovered ? 'scale(1.25)' : 'scale(1)',
-                        transition: 'all 0.4s ease',
-                      }}
-                    >
-                      <Icon className="text-white" style={{ width: '28px', height: '28px' }} strokeWidth={1.8} />
-                    </div>
-                    <p 
-                      className="text-label"
-                      style={{
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        color: isHovered ? engine.color : 'rgba(226, 232, 240, 0.8)',
-                        textShadow: isHovered ? `0 0 12px ${engine.color}50` : 'none',
-                        whiteSpace: 'nowrap',
-                        margin: 0,
-                        transition: 'all 0.3s ease',
-                      }}
-                    >
-                      {engine.name}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Ring 3 (Outer - 95%): ScaleRunway, BoltRunway */}
-            <div 
-              className="orbit-ring"
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                width: '95%',
-                height: '95%',
-                borderRadius: '50%',
-                border: '1.5px solid rgba(99, 102, 241, 0.3)',
-                boxShadow: '0 0 25px rgba(99, 102, 241, 0.12), inset 0 0 25px rgba(99, 102, 241, 0.06)',
-                animation: 'spin 65s linear infinite',
-              }}
-            >
-              {engines.filter(e => e.orbit === 3).map((engine) => {
-                const Icon = engine.icon;
-                const isHovered = hoveredNode === engines.indexOf(engine);
-                const angleOffset = engine.angle;
-                return (
-                  <div
-                    key={engine.name}
-                    className="planet-node"
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: `translate(-50%, -50%) rotate(${angleOffset}deg) translateY(-50%)`,
-                      animation: 'reverse-spin 65s linear infinite',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      gap: '8px',
-                    }}
-                    onMouseEnter={() => setHoveredNode(engines.indexOf(engine))}
-                    onMouseLeave={() => setHoveredNode(null)}
-                  >
-                    <div
-                      className="icon-circle"
-                      style={{
-                        width: '56px',
-                        height: '56px',
-                        borderRadius: '50%',
-                        backgroundColor: engine.color,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        border: isHovered ? '3px solid rgba(255, 255, 255, 0.5)' : '2px solid rgba(255, 255, 255, 0.2)',
-                        boxShadow: isHovered
-                          ? `0 0 45px ${engine.color}95, 0 0 90px ${engine.color}60`
-                          : `0 0 30px ${engine.color}60`,
-                        transform: isHovered ? 'scale(1.25)' : 'scale(1)',
-                        transition: 'all 0.4s ease',
-                      }}
-                    >
-                      <Icon className="text-white" style={{ width: '28px', height: '28px' }} strokeWidth={1.8} />
-                    </div>
-                    <p 
-                      className="text-label"
-                      style={{
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        color: isHovered ? engine.color : 'rgba(226, 232, 240, 0.8)',
-                        textShadow: isHovered ? `0 0 12px ${engine.color}50` : 'none',
-                        whiteSpace: 'nowrap',
-                        margin: 0,
-                        transition: 'all 0.3s ease',
-                      }}
-                    >
-                      {engine.name}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Center Hub */}
-            <div 
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 30,
-              }}
-            >
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={hasAnimated ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-                transition={{ duration: 0.8, type: "spring" }}
-              >
-                <motion.div
-                  style={{ 
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '100px',
-                    height: '100px',
-                    borderRadius: '50%',
-                    background: 'radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 70%)',
-                    border: '1.5px solid rgba(99, 102, 241, 0.3)',
-                  }}
-                  animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.7, 1, 0.7],
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                  }}
-                />
-                <motion.div
-                  style={{ 
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '130px',
-                    height: '130px',
-                    borderRadius: '50%',
-                    background: 'radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%)',
-                    border: '1px solid rgba(99, 102, 241, 0.2)',
-                  }}
-                  animate={{
-                    scale: [1, 1.15, 1],
-                    opacity: [0.5, 0.9, 0.5],
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    delay: 0.6,
-                  }}
-                />
-                <div 
-                  style={{
-                    position: 'relative',
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '50%',
-                    background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.98) 100%)',
-                    border: '2px solid rgba(99, 102, 241, 0.5)',
-                    boxShadow: '0 0 50px rgba(99, 102, 241, 0.4)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <img src={founderplaneLogo} alt="FounderPlane" style={{ width: '48px', height: '48px' }} />
                 </div>
-              </motion.div>
+              </div>
+            </div>
+          </div>
+
+          {/* MIDDLE RING ORBITS - BrandToFly, D2CBolt, B2BBolt (50s) */}
+          {/* BrandToFly - 0° */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%]">
+            <div className="absolute inset-0 animate-[spin_50s_linear_infinite]">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="animate-[reverse-spin_50s_linear_infinite]">
+                  <div 
+                    className="flex flex-col items-center gap-2 cursor-pointer"
+                    onMouseEnter={() => setHoveredNode('BrandToFly')}
+                    onMouseLeave={() => setHoveredNode(null)}
+                  >
+                    <div 
+                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        hoveredNode === 'BrandToFly' 
+                          ? 'scale-125 shadow-[0_0_45px_rgba(102,26,245,0.95)]' 
+                          : 'shadow-[0_0_30px_rgba(102,26,245,0.6)]'
+                      }`}
+                      style={{ 
+                        backgroundColor: '#661AF5',
+                        border: hoveredNode === 'BrandToFly' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
+                      }}
+                    >
+                      <Palette className="text-white w-7 h-7" strokeWidth={1.8} />
+                    </div>
+                    <p 
+                      className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
+                        hoveredNode === 'BrandToFly' ? 'text-[#661AF5]' : 'text-slate-200/80'
+                      }`}
+                      style={{ textShadow: hoveredNode === 'BrandToFly' ? '0 0 12px rgba(102,26,245,0.5)' : 'none' }}
+                    >
+                      BrandToFly
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* D2CBolt - 120° */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rotate-[120deg]">
+            <div className="absolute inset-0 animate-[spin_50s_linear_infinite]">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="animate-[reverse-spin_50s_linear_infinite] -rotate-[120deg]">
+                  <div 
+                    className="flex flex-col items-center gap-2 cursor-pointer"
+                    onMouseEnter={() => setHoveredNode('D2CBolt')}
+                    onMouseLeave={() => setHoveredNode(null)}
+                  >
+                    <div 
+                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        hoveredNode === 'D2CBolt' 
+                          ? 'scale-125 shadow-[0_0_45px_rgba(82,166,91,0.95)]' 
+                          : 'shadow-[0_0_30px_rgba(82,166,91,0.6)]'
+                      }`}
+                      style={{ 
+                        backgroundColor: '#52A65B',
+                        border: hoveredNode === 'D2CBolt' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
+                      }}
+                    >
+                      <Zap className="text-white w-7 h-7" strokeWidth={1.8} />
+                    </div>
+                    <p 
+                      className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
+                        hoveredNode === 'D2CBolt' ? 'text-[#52A65B]' : 'text-slate-200/80'
+                      }`}
+                      style={{ textShadow: hoveredNode === 'D2CBolt' ? '0 0 12px rgba(82,166,91,0.5)' : 'none' }}
+                    >
+                      D2CBolt
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* B2BBolt - 240° */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rotate-[240deg]">
+            <div className="absolute inset-0 animate-[spin_50s_linear_infinite]">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="animate-[reverse-spin_50s_linear_infinite] -rotate-[240deg]">
+                  <div 
+                    className="flex flex-col items-center gap-2 cursor-pointer"
+                    onMouseEnter={() => setHoveredNode('B2BBolt')}
+                    onMouseLeave={() => setHoveredNode(null)}
+                  >
+                    <div 
+                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        hoveredNode === 'B2BBolt' 
+                          ? 'scale-125 shadow-[0_0_45px_rgba(229,87,46,0.95)]' 
+                          : 'shadow-[0_0_30px_rgba(229,87,46,0.6)]'
+                      }`}
+                      style={{ 
+                        backgroundColor: '#E5572E',
+                        border: hoveredNode === 'B2BBolt' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
+                      }}
+                    >
+                      <Zap className="text-white w-7 h-7" strokeWidth={1.8} />
+                    </div>
+                    <p 
+                      className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
+                        hoveredNode === 'B2BBolt' ? 'text-[#E5572E]' : 'text-slate-200/80'
+                      }`}
+                      style={{ textShadow: hoveredNode === 'B2BBolt' ? '0 0 12px rgba(229,87,46,0.5)' : 'none' }}
+                    >
+                      B2BBolt
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* OUTER RING ORBITS - ScaleRunway, BoltRunway (60s) */}
+          {/* ScaleRunway - 45° */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%] rotate-[45deg]">
+            <div className="absolute inset-0 animate-[spin_60s_linear_infinite]">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="animate-[reverse-spin_60s_linear_infinite] -rotate-[45deg]">
+                  <div 
+                    className="flex flex-col items-center gap-2 cursor-pointer"
+                    onMouseEnter={() => setHoveredNode('ScaleRunway')}
+                    onMouseLeave={() => setHoveredNode(null)}
+                  >
+                    <div 
+                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        hoveredNode === 'ScaleRunway' 
+                          ? 'scale-125 shadow-[0_0_45px_rgba(234,161,64,0.95)]' 
+                          : 'shadow-[0_0_30px_rgba(234,161,64,0.6)]'
+                      }`}
+                      style={{ 
+                        backgroundColor: '#EAA140',
+                        border: hoveredNode === 'ScaleRunway' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
+                      }}
+                    >
+                      <Settings className="text-white w-7 h-7" strokeWidth={1.8} />
+                    </div>
+                    <p 
+                      className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
+                        hoveredNode === 'ScaleRunway' ? 'text-[#EAA140]' : 'text-slate-200/80'
+                      }`}
+                      style={{ textShadow: hoveredNode === 'ScaleRunway' ? '0 0 12px rgba(234,161,64,0.5)' : 'none' }}
+                    >
+                      ScaleRunway
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* BoltRunway - 225° */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%] rotate-[225deg]">
+            <div className="absolute inset-0 animate-[spin_60s_linear_infinite]">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="animate-[reverse-spin_60s_linear_infinite] -rotate-[225deg]">
+                  <div 
+                    className="flex flex-col items-center gap-2 cursor-pointer"
+                    onMouseEnter={() => setHoveredNode('BoltRunway')}
+                    onMouseLeave={() => setHoveredNode(null)}
+                  >
+                    <div 
+                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        hoveredNode === 'BoltRunway' 
+                          ? 'scale-125 shadow-[0_0_45px_rgba(193,40,59,0.95)]' 
+                          : 'shadow-[0_0_30px_rgba(193,40,59,0.6)]'
+                      }`}
+                      style={{ 
+                        backgroundColor: '#C1283B',
+                        border: hoveredNode === 'BoltRunway' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
+                      }}
+                    >
+                      <Shield className="text-white w-7 h-7" strokeWidth={1.8} />
+                    </div>
+                    <p 
+                      className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
+                        hoveredNode === 'BoltRunway' ? 'text-[#C1283B]' : 'text-slate-200/80'
+                      }`}
+                      style={{ textShadow: hoveredNode === 'BoltRunway' ? '0 0 12px rgba(193,40,59,0.5)' : 'none' }}
+                    >
+                      BoltRunway
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CENTER CORE - FounderPlane Logo with 2 Pulse Rings */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+            {/* Pulse Ring 1 */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-gradient-to-r from-indigo-500/30 to-violet-500/30 animate-pulse" />
+            {/* Pulse Ring 2 */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-gradient-to-r from-indigo-500/20 to-violet-500/20 animate-pulse" style={{ animationDelay: '0.5s' }} />
+            {/* Logo */}
+            <div className="relative w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-br from-slate-900/95 to-slate-800/95 border-2 border-indigo-500/50 shadow-[0_0_50px_rgba(99,102,241,0.4)]">
+              <img src={founderplaneLogo} alt="FounderPlane" className="w-12 h-12" />
             </div>
           </div>
         </div>
 
-        <motion.div
-          className="max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <div 
-            className="backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl relative overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%)',
-              border: '1px solid rgba(148, 163, 184, 0.1)',
-            }}
-          >
+        {/* Platform Advantage Box */}
+        <div className="max-w-3xl mx-auto">
+          <div className="backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl relative overflow-hidden bg-gradient-to-br from-slate-800/40 to-slate-900/60 border border-slate-700/10">
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent" />
             <div className="relative z-10">
               <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
@@ -400,20 +290,16 @@ const EcosystemOrbitalSection = () => {
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
+      {/* CSS Keyframes */}
       <style>{`
         @keyframes spin {
-          100% {
-            transform: translate(-50%, -50%) rotate(360deg);
-          }
+          to { transform: rotate(360deg); }
         }
-        
         @keyframes reverse-spin {
-          100% {
-            transform: rotate(-360deg);
-          }
+          to { transform: rotate(-360deg); }
         }
       `}</style>
     </section>
