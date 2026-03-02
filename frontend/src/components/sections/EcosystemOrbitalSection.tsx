@@ -204,22 +204,27 @@ const EcosystemOrbitalSection = () => {
               </motion.div>
             </div>
 
-            {/* Engine Nodes - Locked to Rings */}
+            {/* Engine Nodes - Locked to Rings with Counter-Rotation */}
             {engines.map((engine, index) => {
               const Icon = engine.icon;
-              const orbitRadius = engine.orbit === 1 ? 15 : engine.orbit === 2 ? 30 : 45;
+              // Updated orbital radii to match new ring sizes
+              const orbitRadius = engine.orbit === 1 ? 22.5 : engine.orbit === 2 ? 35 : 47.5;
               const pos = getOrbitalPosition(engine.angle, orbitRadius);
               const isHovered = hoveredNode === index;
+              
+              // Match parent ring animation speed for counter-rotation
+              const rotationSpeed = engine.orbit === 1 ? '45s' : engine.orbit === 2 ? '55s' : '65s';
 
               return (
                 <motion.div
                   key={`node-${index}`}
-                  className="absolute z-20"
+                  className="absolute z-20 node-counter-rotate"
                   style={{
                     position: 'absolute',
                     left: `${pos.x}%`,
                     top: `${pos.y}%`,
                     transform: 'translate(-50%, -50%)',
+                    animation: `reverse-spin ${rotationSpeed} linear infinite`,
                   }}
                   initial={{ scale: 0, opacity: 0 }}
                   animate={
