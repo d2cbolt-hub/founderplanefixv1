@@ -393,7 +393,6 @@ const EcosystemOrbitalSection = () => {
                 </motion.div>
               </div>
             </div>
-          </div>
         </div>
 
         {/* Anchor Box - Keep original content */}
