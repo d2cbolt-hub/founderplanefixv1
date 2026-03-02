@@ -358,6 +358,39 @@ const EcosystemOrbitalSection = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* CSS Keyframes for Orbital Animation */}
+      <style>{`
+        /* Ring rotation - spins the orbital tracks */
+        @keyframes spin {
+          from {
+            transform: translate(-50%, -50%) rotate(0deg);
+          }
+          to {
+            transform: translate(-50%, -50%) rotate(360deg);
+          }
+        }
+        
+        /* Counter-rotation for nodes - keeps text upright */
+        @keyframes reverse-spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(-360deg);
+          }
+        }
+        
+        /* Apply to ring containers */
+        .ring-container {
+          transform: translate(-50%, -50%);
+        }
+        
+        /* Ensure nodes counter-rotate smoothly */
+        .node-counter-rotate {
+          transform-origin: center center;
+        }
+      `}</style>
     </section>
   );
 };
