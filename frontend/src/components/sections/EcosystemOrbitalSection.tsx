@@ -116,36 +116,45 @@ const EcosystemOrbitalSection = () => {
           </div>
 
           {/* D2CBolt - 120° */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rotate-[120deg]">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%]">
+            {/* 1. The Track: Infinite forward spin */}
             <div className="absolute inset-0 animate-[spin_50s_linear_infinite]">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="animate-[reverse-spin_50s_linear_infinite] -rotate-[120deg]">
-                  <div 
-                    className="flex flex-col items-center gap-2 cursor-pointer"
-                    onMouseEnter={() => setHoveredNode('D2CBolt')}
-                    onMouseLeave={() => setHoveredNode(null)}
-                  >
-                    <div 
-                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        hoveredNode === 'D2CBolt' 
-                          ? 'scale-125 shadow-[0_0_45px_rgba(82,166,91,0.95)]' 
-                          : 'shadow-[0_0_30px_rgba(82,166,91,0.6)]'
-                      }`}
-                      style={{ 
-                        backgroundColor: '#52A65B',
-                        border: hoveredNode === 'D2CBolt' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
-                      }}
-                    >
-                      <Zap className="text-white w-7 h-7" strokeWidth={1.8} />
+              {/* 2. The Spoke: Static starting angle (120°) */}
+              <div className="absolute inset-0 rotate-[120deg]">
+                {/* 3. Node Placement: At top edge */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  {/* 4. Counter-Spoke: Opposite static rotation (-120°) - THE GYROSCOPE */}
+                  <div className="-rotate-[120deg]">
+                    {/* 5. Counter-Spin: Infinite reverse animation */}
+                    <div className="animate-[reverse-spin_50s_linear_infinite]">
+                      <div 
+                        className="flex flex-col items-center gap-2 cursor-pointer"
+                        onMouseEnter={() => setHoveredNode('D2CBolt')}
+                        onMouseLeave={() => setHoveredNode(null)}
+                      >
+                        <div 
+                          className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                            hoveredNode === 'D2CBolt' 
+                              ? 'scale-125 shadow-[0_0_45px_rgba(82,166,91,0.95)]' 
+                              : 'shadow-[0_0_30px_rgba(82,166,91,0.6)]'
+                          }`}
+                          style={{ 
+                            backgroundColor: '#52A65B',
+                            border: hoveredNode === 'D2CBolt' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
+                          }}
+                        >
+                          <Zap className="text-white w-7 h-7" strokeWidth={1.8} />
+                        </div>
+                        <p 
+                          className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
+                            hoveredNode === 'D2CBolt' ? 'text-[#52A65B]' : 'text-slate-200/80'
+                          }`}
+                          style={{ textShadow: hoveredNode === 'D2CBolt' ? '0 0 12px rgba(82,166,91,0.5)' : 'none' }}
+                        >
+                          D2CBolt
+                        </p>
+                      </div>
                     </div>
-                    <p 
-                      className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
-                        hoveredNode === 'D2CBolt' ? 'text-[#52A65B]' : 'text-slate-200/80'
-                      }`}
-                      style={{ textShadow: hoveredNode === 'D2CBolt' ? '0 0 12px rgba(82,166,91,0.5)' : 'none' }}
-                    >
-                      D2CBolt
-                    </p>
                   </div>
                 </div>
               </div>
@@ -153,36 +162,45 @@ const EcosystemOrbitalSection = () => {
           </div>
 
           {/* B2BBolt - 240° */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rotate-[240deg]">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%]">
+            {/* 1. The Track: Infinite forward spin */}
             <div className="absolute inset-0 animate-[spin_50s_linear_infinite]">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="animate-[reverse-spin_50s_linear_infinite] -rotate-[240deg]">
-                  <div 
-                    className="flex flex-col items-center gap-2 cursor-pointer"
-                    onMouseEnter={() => setHoveredNode('B2BBolt')}
-                    onMouseLeave={() => setHoveredNode(null)}
-                  >
-                    <div 
-                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        hoveredNode === 'B2BBolt' 
-                          ? 'scale-125 shadow-[0_0_45px_rgba(229,87,46,0.95)]' 
-                          : 'shadow-[0_0_30px_rgba(229,87,46,0.6)]'
-                      }`}
-                      style={{ 
-                        backgroundColor: '#E5572E',
-                        border: hoveredNode === 'B2BBolt' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
-                      }}
-                    >
-                      <Zap className="text-white w-7 h-7" strokeWidth={1.8} />
+              {/* 2. The Spoke: Static starting angle (240°) */}
+              <div className="absolute inset-0 rotate-[240deg]">
+                {/* 3. Node Placement: At top edge */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  {/* 4. Counter-Spoke: Opposite static rotation (-240°) - THE GYROSCOPE */}
+                  <div className="-rotate-[240deg]">
+                    {/* 5. Counter-Spin: Infinite reverse animation */}
+                    <div className="animate-[reverse-spin_50s_linear_infinite]">
+                      <div 
+                        className="flex flex-col items-center gap-2 cursor-pointer"
+                        onMouseEnter={() => setHoveredNode('B2BBolt')}
+                        onMouseLeave={() => setHoveredNode(null)}
+                      >
+                        <div 
+                          className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
+                            hoveredNode === 'B2BBolt' 
+                              ? 'scale-125 shadow-[0_0_45px_rgba(229,87,46,0.95)]' 
+                              : 'shadow-[0_0_30px_rgba(229,87,46,0.6)]'
+                          }`}
+                          style={{ 
+                            backgroundColor: '#E5572E',
+                            border: hoveredNode === 'B2BBolt' ? '3px solid rgba(255,255,255,0.5)' : '2px solid rgba(255,255,255,0.2)'
+                          }}
+                        >
+                          <Zap className="text-white w-7 h-7" strokeWidth={1.8} />
+                        </div>
+                        <p 
+                          className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
+                            hoveredNode === 'B2BBolt' ? 'text-[#E5572E]' : 'text-slate-200/80'
+                          }`}
+                          style={{ textShadow: hoveredNode === 'B2BBolt' ? '0 0 12px rgba(229,87,46,0.5)' : 'none' }}
+                        >
+                          B2BBolt
+                        </p>
+                      </div>
                     </div>
-                    <p 
-                      className={`text-xs font-bold whitespace-nowrap transition-colors duration-300 ${
-                        hoveredNode === 'B2BBolt' ? 'text-[#E5572E]' : 'text-slate-200/80'
-                      }`}
-                      style={{ textShadow: hoveredNode === 'B2BBolt' ? '0 0 12px rgba(229,87,46,0.5)' : 'none' }}
-                    >
-                      B2BBolt
-                    </p>
                   </div>
                 </div>
               </div>
