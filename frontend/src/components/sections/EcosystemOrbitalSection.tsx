@@ -266,75 +266,85 @@ const EcosystemOrbitalSection = () => {
                           ease: "linear",
                         }}
                       >
-                      <div className="flex flex-col items-center cursor-pointer group">
-                        {/* Node Circle */}
-                        <motion.div
-                          className="rounded-full flex items-center justify-center relative"
-                          animate={isHovered ? { scale: 1.15 } : { scale: 1 }}
-                          transition={{ duration: 0.3, ease: "easeOut" }}
-                          style={{
-                            width: engine.orbit === 1 ? '56px' : engine.orbit === 2 ? '52px' : '48px',
-                            height: engine.orbit === 1 ? '56px' : engine.orbit === 2 ? '52px' : '48px',
-                            backgroundColor: engine.color,
-                            boxShadow: isHovered
-                              ? `0 0 30px ${engine.color}80, 0 0 60px ${engine.color}40, 0 8px 32px -4px ${engine.color}60`
-                              : `0 0 20px ${engine.color}40, 0 4px 16px -4px ${engine.color}30`,
-                            border: isHovered ? `2px solid ${engine.color}` : '2px solid rgba(255, 255, 255, 0.1)',
-                          }}
-                        >
-                          {/* Pulsating glow effect on hover */}
-                          {isHovered && (
-                            <motion.div
-                              className="absolute inset-0 rounded-full"
-                              style={{ backgroundColor: engine.color }}
-                              animate={{
-                                scale: [1, 1.4, 1],
-                                opacity: [0.3, 0, 0.3],
-                              }}
-                              transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                              }}
-                            />
-                          )}
-                          <Icon 
-                            className="text-white relative z-10" 
-                            style={{ 
-                              width: engine.orbit === 1 ? '26px' : '24px', 
-                              height: engine.orbit === 1 ? '26px' : '24px' 
-                            }} 
-                            strokeWidth={1.5} 
-                          />
-                        </motion.div>
-
-                        {/* Node Label - Always upright */}
-                        <motion.div
-                          className="mt-3 text-center"
-                          animate={isHovered ? { y: -2 } : { y: 0 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <span 
-                            className="text-[11px] md:text-xs font-bold tracking-wide block transition-colors duration-300 whitespace-nowrap"
+                      {/* Counter-rotation wrapper - this cancels out parent rotation */}
+                      <motion.div
+                        animate={isRotationPaused ? {} : { rotate: -360 }}
+                        transition={{
+                          duration: 60,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                      >
+                        <div className="flex flex-col items-center cursor-pointer group">
+                          {/* Node Circle */}
+                          <motion.div
+                            className="rounded-full flex items-center justify-center relative"
+                            animate={isHovered ? { scale: 1.15 } : { scale: 1 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
                             style={{
-                              color: isHovered ? engine.color : 'rgba(226, 232, 240, 0.7)',
-                              textShadow: isHovered ? `0 0 10px ${engine.color}40` : 'none',
+                              width: engine.orbit === 1 ? '56px' : engine.orbit === 2 ? '52px' : '48px',
+                              height: engine.orbit === 1 ? '56px' : engine.orbit === 2 ? '52px' : '48px',
+                              backgroundColor: engine.color,
+                              boxShadow: isHovered
+                                ? `0 0 30px ${engine.color}80, 0 0 60px ${engine.color}40, 0 8px 32px -4px ${engine.color}60`
+                                : `0 0 20px ${engine.color}40, 0 4px 16px -4px ${engine.color}30`,
+                              border: isHovered ? `2px solid ${engine.color}` : '2px solid rgba(255, 255, 255, 0.1)',
                             }}
                           >
-                            {engine.name}
-                          </span>
-                          {isHovered && (
-                            <motion.span
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="text-[9px] md:text-[10px] text-slate-400 font-medium block mt-1"
+                            {/* Pulsating glow effect on hover */}
+                            {isHovered && (
+                              <motion.div
+                                className="absolute inset-0 rounded-full"
+                                style={{ backgroundColor: engine.color }}
+                                animate={{
+                                  scale: [1, 1.4, 1],
+                                  opacity: [0.3, 0, 0.3],
+                                }}
+                                transition={{
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  ease: "easeInOut",
+                                }}
+                              />
+                            )}
+                            <Icon 
+                              className="text-white relative z-10" 
+                              style={{ 
+                                width: engine.orbit === 1 ? '26px' : '24px', 
+                                height: engine.orbit === 1 ? '26px' : '24px' 
+                              }} 
+                              strokeWidth={1.5} 
+                            />
+                          </motion.div>
+
+                          {/* Node Label - Always upright */}
+                          <motion.div
+                            className="mt-3 text-center"
+                            animate={isHovered ? { y: -2 } : { y: 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <span 
+                              className="text-[11px] md:text-xs font-bold tracking-wide block transition-colors duration-300 whitespace-nowrap"
+                              style={{
+                                color: isHovered ? engine.color : 'rgba(226, 232, 240, 0.7)',
+                                textShadow: isHovered ? `0 0 10px ${engine.color}40` : 'none',
+                              }}
                             >
-                              {engine.label}
-                            </motion.span>
-                          )}
-                        </motion.div>
-                      </div>
+                              {engine.name}
+                            </span>
+                            {isHovered && (
+                              <motion.span
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="text-[9px] md:text-[10px] text-slate-400 font-medium block mt-1"
+                              >
+                                {engine.label}
+                              </motion.span>
+                            )}
+                          </motion.div>
+                        </div>
+                      </motion.div>
                     </motion.div>
                   );
                 })}
