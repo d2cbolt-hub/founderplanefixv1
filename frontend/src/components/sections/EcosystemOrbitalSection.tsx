@@ -12,10 +12,7 @@ interface Engine {
   angle: number; // degrees
 }
 
-// Engine configuration based on specs:
-// Inner Track: BoltGuider
-// Middle Track: BrandToFly, D2CBolt, B2BBolt (120° apart)
-// Outer Track: ScaleRunway, BoltRunway
+// Engine configuration - each node moves along its orbit at different speeds
 const engines: Engine[] = [
   { name: "BoltGuider", label: "Validation Engine", icon: Compass, color: "#2C5AF6", orbit: 1, angle: 0 },
   { name: "BrandToFly", label: "Identity Engine", icon: Palette, color: "#661AF5", orbit: 2, angle: 0 },
@@ -24,6 +21,9 @@ const engines: Engine[] = [
   { name: "ScaleRunway", label: "Operations Engine", icon: Settings, color: "#EAA140", orbit: 3, angle: 45 },
   { name: "BoltRunway", label: "Strategic Scale Engine", icon: Shield, color: "#C1283B", orbit: 3, angle: 225 },
 ];
+
+// Orbital speeds - each node moves at different rate for organic feel
+const orbitalSpeeds = [30, 40, 35, 45, 50, 38]; // seconds per revolution (varying speeds)
 
 const EcosystemOrbitalSection = () => {
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
