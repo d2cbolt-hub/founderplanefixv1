@@ -308,7 +308,7 @@ const EcosystemOrbitalSection = () => {
                 })}
               </motion.div>
 
-              {/* Center Hub - FounderPlane Logo with Pulsating Glow */}
+              {/* THE CORE: FounderPlane Logo with EXACTLY 2 Tight Glowing Pulse Rings */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
                 <motion.div
                   className="relative"
@@ -316,25 +316,58 @@ const EcosystemOrbitalSection = () => {
                   animate={hasAnimated ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
                   transition={{ duration: 0.8, type: "spring", stiffness: 180, damping: 18 }}
                 >
-                  {/* Pulsating Glow Ring - CSS Keyframe Animation */}
-                  <div className="absolute -inset-6 rounded-full pulsating-glow" />
+                  {/* Pulse Ring 1 - Tight, Inner Glow (Enhanced) */}
+                  <motion.div
+                    className="absolute -inset-4 rounded-full"
+                    style={{ 
+                      background: 'radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, rgba(99, 102, 241, 0.08) 50%, transparent 100%)',
+                      border: '1.5px solid rgba(99, 102, 241, 0.25)',
+                      boxShadow: '0 0 20px rgba(99, 102, 241, 0.3)',
+                    }}
+                    animate={{
+                      scale: [1, 1.08, 1],
+                      opacity: [0.7, 1, 0.7],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
                   
-                  {/* Outer Ring */}
-                  <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-indigo-500/20 to-violet-500/20 blur-xl" />
+                  {/* Pulse Ring 2 - Tight, Outer Glow (Enhanced) */}
+                  <motion.div
+                    className="absolute -inset-6 rounded-full"
+                    style={{ 
+                      background: 'radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.04) 50%, transparent 100%)',
+                      border: '1px solid rgba(99, 102, 241, 0.18)',
+                      boxShadow: '0 0 30px rgba(99, 102, 241, 0.2)',
+                    }}
+                    animate={{
+                      scale: [1, 1.12, 1],
+                      opacity: [0.5, 0.8, 0.5],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.6,
+                    }}
+                  />
                   
-                  {/* Logo Container */}
+                  {/* Logo Container - Enhanced */}
                   <div 
-                    className="w-20 h-20 md:w-28 md:h-28 rounded-full flex items-center justify-center relative z-10"
+                    className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center relative z-10"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%)',
-                      border: '2px solid rgba(99, 102, 241, 0.3)',
-                      boxShadow: '0 0 40px rgba(99, 102, 241, 0.2), 0 0 80px rgba(99, 102, 241, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.1)',
+                      background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.98) 100%)',
+                      border: '2px solid rgba(99, 102, 241, 0.5)',
+                      boxShadow: '0 0 50px rgba(99, 102, 241, 0.4), 0 0 100px rgba(99, 102, 241, 0.2), inset 0 2px 6px rgba(255, 255, 255, 0.15)',
                     }}
                   >
                     <img 
                       src={founderplaneLogo} 
                       alt="FounderPlane" 
-                      className="w-12 h-12 md:w-16 md:h-16 relative z-10" 
+                      className="w-11 h-11 md:w-14 md:h-14 relative z-10" 
                     />
                   </div>
                 </motion.div>
