@@ -10,18 +10,25 @@ interface Engine {
   color: string;
   orbit: number;
   angle: number;
-  speed: number; // seconds per orbit
 }
 
-// Engine configuration - each moves at different speed for organic feel
 const engines: Engine[] = [
-  { name: "BoltGuider", label: "Validation Engine", icon: Compass, color: "#2C5AF6", orbit: 1, angle: 0, speed: 35 },
-  { name: "BrandToFly", label: "Identity Engine", icon: Palette, color: "#661AF5", orbit: 2, angle: 0, speed: 42 },
-  { name: "D2CBolt", label: "D2C Commerce Engine", icon: Zap, color: "#52A65B", orbit: 2, angle: 120, speed: 38 },
-  { name: "B2BBolt", label: "B2B Revenue Engine", icon: Zap, color: "#E5572E", orbit: 2, angle: 240, speed: 47 },
-  { name: "ScaleRunway", label: "Operations Engine", icon: Settings, color: "#EAA140", orbit: 3, angle: 45, speed: 52 },
-  { name: "BoltRunway", label: "Strategic Scale Engine", icon: Shield, color: "#C1283B", orbit: 3, angle: 225, speed: 44 },
+  { name: "BoltGuider", label: "Validation Engine", icon: Compass, color: "#2C5AF6", orbit: 1, angle: 0 },
+  { name: "BrandToFly", label: "Identity Engine", icon: Palette, color: "#661AF5", orbit: 2, angle: 0 },
+  { name: "D2CBolt", label: "D2C Commerce Engine", icon: Zap, color: "#52A65B", orbit: 2, angle: 120 },
+  { name: "B2BBolt", label: "B2B Revenue Engine", icon: Zap, color: "#E5572E", orbit: 2, angle: 240 },
+  { name: "ScaleRunway", label: "Operations Engine", icon: Settings, color: "#EAA140", orbit: 3, angle: 45 },
+  { name: "BoltRunway", label: "Strategic Scale Engine", icon: Shield, color: "#C1283B", orbit: 3, angle: 225 },
 ];
+
+// Calculate position on orbit ring
+const getOrbitalPosition = (angle: number, orbitRadius: number) => {
+  const radian = (angle * Math.PI) / 180;
+  return {
+    x: 50 + orbitRadius * Math.cos(radian - Math.PI / 2),
+    y: 50 + orbitRadius * Math.sin(radian - Math.PI / 2),
+  };
+};
 
 const EcosystemOrbitalSection = () => {
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
@@ -38,7 +45,7 @@ const EcosystemOrbitalSection = () => {
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-slate-950 py-20 md:py-32">
-      {/* Premium dark background with subtle gradients */}
+      {/* Premium dark background */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.08)_0%,transparent_50%)] pointer-events-none" />
       <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-indigo-500/[0.05] rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-violet-500/[0.05] rounded-full blur-[100px] pointer-events-none" />
@@ -63,81 +70,103 @@ const EcosystemOrbitalSection = () => {
           </p>
         </motion.div>
 
-        {/* Dynamic Orbital Ecosystem */}
+        {/* STRICT BOUNDING BOX - Fixed Container */}
         <div 
           className="relative mx-auto"
           style={{ 
+            position: 'relative',
+            width: '100%',
             maxWidth: '550px',
-            width: '90vw',
-            aspectRatio: '1/1',
-            marginTop: '80px',
-            marginBottom: '80px',
+            aspectRatio: '1 / 1',
+            margin: '80px auto',
           }}
         >
           <div className="absolute inset-0" style={{ padding: '5%' }}>
-            {/* Highly Visible Orbit Rings with Glow */}
-            {[
-              { size: '30%', opacity: 0.4, glow: '15px', duration: 60 },
-              { size: '60%', opacity: 0.35, glow: '20px', duration: 80 },
-              { size: '90%', opacity: 0.3, glow: '25px', duration: 100 },
-            ].map((ring, i) => (
-              <motion.div
-                key={`ring-${i}`}
-                className="absolute rounded-full pointer-events-none"
-                style={{
-                  top: '50%',
-                  left: '50%',
-                  width: ring.size,
-                  height: ring.size,
-                  transform: 'translate(-50%, -50%)',
-                  border: `1.5px solid rgba(99, 102, 241, ${ring.opacity})`,
-                  boxShadow: `0 0 ${ring.glow} rgba(99, 102, 241, 0.2), inset 0 0 ${ring.glow} rgba(99, 102, 241, 0.1)`,
-                }}
-                animate={{
-                  rotate: i % 2 === 0 ? 360 : -360,
-                  borderColor: [`rgba(99, 102, 241, ${ring.opacity})`, `rgba(139, 92, 246, ${ring.opacity})`, `rgba(99, 102, 241, ${ring.opacity})`],
-                }}
-                transition={{
-                  rotate: { duration: ring.duration, repeat: Infinity, ease: "linear" },
-                  borderColor: { duration: 8 + i * 2, repeat: Infinity, ease: "easeInOut" },
-                }}
-              />
-            ))}
+            {/* PERFECT CONCENTRIC RINGS - All Centered on Logo */}
+            
+            {/* Ring 1 (Inner - 30%): BoltGuider */}
+            <motion.div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                width: '30%',
+                height: '30%',
+                transform: 'translate(-50%, -50%)',
+                borderRadius: '50%',
+                border: '1.5px solid rgba(99, 102, 241, 0.4)',
+                boxShadow: '0 0 15px rgba(99, 102, 241, 0.2), inset 0 0 15px rgba(99, 102, 241, 0.1)',
+              }}
+              animate={{
+                borderColor: ['rgba(99, 102, 241, 0.4)', 'rgba(139, 92, 246, 0.4)', 'rgba(99, 102, 241, 0.4)'],
+              }}
+              transition={{
+                borderColor: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+              }}
+            />
+            
+            {/* Ring 2 (Middle - 60%): BrandToFly, D2CBolt, B2BBolt */}
+            <motion.div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                width: '60%',
+                height: '60%',
+                transform: 'translate(-50%, -50%)',
+                borderRadius: '50%',
+                border: '1.5px solid rgba(99, 102, 241, 0.35)',
+                boxShadow: '0 0 20px rgba(99, 102, 241, 0.15), inset 0 0 20px rgba(99, 102, 241, 0.08)',
+              }}
+              animate={{
+                borderColor: ['rgba(99, 102, 241, 0.35)', 'rgba(139, 92, 246, 0.35)', 'rgba(99, 102, 241, 0.35)'],
+              }}
+              transition={{
+                borderColor: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+              }}
+            />
+            
+            {/* Ring 3 (Outer - 90%): ScaleRunway, BoltRunway */}
+            <motion.div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                width: '90%',
+                height: '90%',
+                transform: 'translate(-50%, -50%)',
+                borderRadius: '50%',
+                border: '1.5px solid rgba(99, 102, 241, 0.3)',
+                boxShadow: '0 0 25px rgba(99, 102, 241, 0.12), inset 0 0 25px rgba(99, 102, 241, 0.06)',
+              }}
+              animate={{
+                borderColor: ['rgba(99, 102, 241, 0.3)', 'rgba(139, 92, 246, 0.3)', 'rgba(99, 102, 241, 0.3)'],
+              }}
+              transition={{
+                borderColor: { duration: 12, repeat: Infinity, ease: "easeInOut" },
+              }}
+            />
 
-            {/* Animated Background Particles */}
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={`particle-${i}`}
-                className="absolute rounded-full"
-                style={{
-                  width: `${Math.random() * 3 + 1}px`,
-                  height: `${Math.random() * 3 + 1}px`,
-                  background: 'rgba(99, 102, 241, 0.5)',
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  boxShadow: '0 0 6px rgba(99, 102, 241, 0.8)',
-                }}
-                animate={{
-                  opacity: [0.2, 0.9, 0.2],
-                  scale: [1, 1.8, 1],
-                }}
-                transition={{
-                  duration: Math.random() * 3 + 2,
-                  repeat: Infinity,
-                  delay: Math.random() * 2,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
-
-            {/* Center Hub with 2 Pulse Rings */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
+            {/* Center Hub - FounderPlane Logo with 2 Pulse Rings */}
+            <div 
+              className="absolute z-30"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
               <motion.div
                 className="relative"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={hasAnimated ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
                 transition={{ duration: 0.8, type: "spring", stiffness: 180, damping: 18 }}
               >
+                {/* Pulse Ring 1 */}
                 <motion.div
                   className="absolute -inset-4 rounded-full"
                   style={{ 
@@ -155,6 +184,8 @@ const EcosystemOrbitalSection = () => {
                     ease: "easeInOut",
                   }}
                 />
+                
+                {/* Pulse Ring 2 */}
                 <motion.div
                   className="absolute -inset-6 rounded-full"
                   style={{ 
@@ -173,6 +204,8 @@ const EcosystemOrbitalSection = () => {
                     delay: 0.6,
                   }}
                 />
+                
+                {/* Logo Container */}
                 <div 
                   className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center relative z-10"
                   style={{
@@ -186,45 +219,42 @@ const EcosystemOrbitalSection = () => {
               </motion.div>
             </div>
 
-            {/* Moving Nodes */}
+            {/* Engine Nodes - Locked to Rings */}
             {engines.map((engine, index) => {
               const Icon = engine.icon;
               const orbitRadius = engine.orbit === 1 ? 15 : engine.orbit === 2 ? 30 : 45;
+              const pos = getOrbitalPosition(engine.angle, orbitRadius);
               const isHovered = hoveredNode === index;
 
               return (
                 <motion.div
                   key={`node-${index}`}
-                  className="absolute"
+                  className="absolute z-20"
                   style={{
-                    left: '50%',
-                    top: '50%',
+                    position: 'absolute',
+                    left: `${pos.x}%`,
+                    top: `${pos.y}%`,
+                    transform: 'translate(-50%, -50%)',
                   }}
                   initial={{ scale: 0, opacity: 0 }}
                   animate={
                     hasAnimated 
-                      ? {
-                          x: `${orbitRadius * Math.cos((engine.angle - 90 + (hasAnimated ? 0 : 0)) * Math.PI / 180)}%`,
-                          y: `${orbitRadius * Math.sin((engine.angle - 90 + (hasAnimated ? 0 : 0)) * Math.PI / 180)}%`,
-                          scale: 1,
-                          opacity: 1,
-                        }
+                      ? { scale: 1, opacity: 1 }
                       : { scale: 0, opacity: 0 }
                   }
                   transition={{
-                    scale: { duration: 0.6, delay: 0.2 + index * 0.1, type: "spring" },
+                    scale: { duration: 0.6, delay: 0.2 + index * 0.1, type: "spring", stiffness: 200 },
                     opacity: { duration: 0.6, delay: 0.2 + index * 0.1 },
-                    x: { duration: engine.speed, repeat: Infinity, ease: "linear" },
-                    y: { duration: engine.speed, repeat: Infinity, ease: "linear" },
                   }}
                   onMouseEnter={() => setHoveredNode(index)}
                   onMouseLeave={() => setHoveredNode(null)}
                 >
-                  <div className="flex flex-col items-center cursor-pointer" style={{ transform: 'translate(-50%, -50%)' }}>
+                  <div className="flex flex-col items-center cursor-pointer">
+                    {/* Node Circle */}
                     <motion.div
                       className="rounded-full flex items-center justify-center relative"
                       animate={isHovered ? { scale: 1.25 } : { scale: 1 }}
-                      transition={{ duration: 0.4 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
                       style={{
                         width: '56px',
                         height: '56px',
@@ -235,6 +265,7 @@ const EcosystemOrbitalSection = () => {
                         border: isHovered ? `3px solid rgba(255, 255, 255, 0.5)` : '2px solid rgba(255, 255, 255, 0.2)',
                       }}
                     >
+                      {/* Dual Pulsating Waves on Hover */}
                       {isHovered && (
                         <>
                           <motion.div
@@ -247,6 +278,7 @@ const EcosystemOrbitalSection = () => {
                             transition={{
                               duration: 1.5,
                               repeat: Infinity,
+                              ease: "easeInOut",
                             }}
                           />
                           <motion.div
@@ -259,14 +291,29 @@ const EcosystemOrbitalSection = () => {
                             transition={{
                               duration: 1.5,
                               repeat: Infinity,
+                              ease: "easeInOut",
                               delay: 0.4,
                             }}
                           />
                         </>
                       )}
-                      <Icon className="text-white relative z-10" style={{ width: '28px', height: '28px', filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))' }} strokeWidth={1.8} />
+                      <Icon 
+                        className="text-white relative z-10" 
+                        style={{ 
+                          width: '28px', 
+                          height: '28px',
+                          filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))'
+                        }} 
+                        strokeWidth={1.8} 
+                      />
                     </motion.div>
-                    <motion.div className="mt-3 text-center" animate={isHovered ? { y: -2 } : { y: 0 }}>
+
+                    {/* Node Label */}
+                    <motion.div
+                      className="mt-3 text-center"
+                      animate={isHovered ? { y: -2 } : { y: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
                       <span 
                         className="text-xs font-bold tracking-wide block whitespace-nowrap"
                         style={{
@@ -278,8 +325,9 @@ const EcosystemOrbitalSection = () => {
                       </span>
                       {isHovered && (
                         <motion.span
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
                           className="text-[10px] text-slate-400 font-medium block mt-1"
                         >
                           {engine.label}
