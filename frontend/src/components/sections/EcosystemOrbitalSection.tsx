@@ -86,45 +86,45 @@ const EcosystemOrbitalSection = () => {
             margin: '60px auto',
           }}
         >
-            {/* Container with preserved aspect ratio */}
-            <div className="absolute inset-0">
-              {/* EXACTLY 3 Orbital Rings - Clean and Subtle */}
-              {/* Ring 1 (Inner - 30%): BoltGuider */}
-              {/* Ring 2 (Middle - 50%): BrandToFly, D2CBolt, B2BBolt */}
-              {/* Ring 3 (Outer - 68%): ScaleRunway, BoltRunway */}
-              <div
-                className="absolute rounded-full pointer-events-none"
-                style={{
-                  top: '50%',
-                  left: '50%',
-                  width: '60%',
-                  height: '60%',
-                  transform: 'translate(-50%, -50%)',
-                  border: '1px dashed rgba(255, 255, 255, 0.1)',
-                }}
-              />
-              <div
-                className="absolute rounded-full pointer-events-none"
-                style={{
-                  top: '50%',
-                  left: '50%',
-                  width: '100%',
-                  height: '100%',
-                  transform: 'translate(-50%, -50%)',
-                  border: '1px dashed rgba(255, 255, 255, 0.1)',
-                }}
-              />
-              <div
-                className="absolute rounded-full pointer-events-none"
-                style={{
-                  top: '50%',
-                  left: '50%',
-                  width: '136%',
-                  height: '136%',
-                  transform: 'translate(-50%, -50%)',
-                  border: '1px dashed rgba(255, 255, 255, 0.1)',
-                }}
-              />
+          {/* Inner Container with padding - All orbital elements must stay within this */}
+          <div className="absolute inset-0" style={{ padding: '5%' }}>
+            {/* THE TRACKS: EXACTLY 3 Faint Orbital Rings - Fully contained */}
+            {/* Ring 1 (Inner - 28%): BoltGuider */}
+            <div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                top: '50%',
+                left: '50%',
+                width: '56%',
+                height: '56%',
+                transform: 'translate(-50%, -50%)',
+                border: '1px dashed rgba(148, 163, 184, 0.12)',
+              }}
+            />
+            {/* Ring 2 (Middle - 48%): BrandToFly, D2CBolt, B2BBolt */}
+            <div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                top: '50%',
+                left: '50%',
+                width: '96%',
+                height: '96%',
+                transform: 'translate(-50%, -50%)',
+                border: '1px dashed rgba(148, 163, 184, 0.1)',
+              }}
+            />
+            {/* Ring 3 (Outer - 68%): ScaleRunway, BoltRunway */}
+            <div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                top: '50%',
+                left: '50%',
+                width: '136%',
+                height: '136%',
+                transform: 'translate(-50%, -50%)',
+                border: '1px dashed rgba(148, 163, 184, 0.08)',
+              }}
+            />
 
               {/* Rotating Track System */}
               <motion.div
