@@ -82,71 +82,56 @@ const EcosystemOrbitalSection = () => {
           }}
         >
           <div className="absolute inset-0" style={{ padding: '5%' }}>
-            {/* PERFECT CONCENTRIC RINGS - All Centered on Logo */}
+            {/* PERFECT CONCENTRIC RINGS - Pushed Outward */}
             
-            {/* Ring 1 (Inner - 30%): BoltGuider */}
-            <motion.div
-              className="absolute rounded-full pointer-events-none"
+            {/* Ring 1 (Inner - 45%): BoltGuider - Clears center core */}
+            <div
+              className="absolute rounded-full pointer-events-none ring-container"
               style={{
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
-                width: '30%',
-                height: '30%',
-                transform: 'translate(-50%, -50%)',
+                width: '45%',
+                height: '45%',
                 borderRadius: '50%',
                 border: '1.5px solid rgba(99, 102, 241, 0.4)',
                 boxShadow: '0 0 15px rgba(99, 102, 241, 0.2), inset 0 0 15px rgba(99, 102, 241, 0.1)',
-              }}
-              animate={{
-                borderColor: ['rgba(99, 102, 241, 0.4)', 'rgba(139, 92, 246, 0.4)', 'rgba(99, 102, 241, 0.4)'],
-              }}
-              transition={{
-                borderColor: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+                animation: 'spin 45s linear infinite',
+                transformOrigin: 'center center',
               }}
             />
             
-            {/* Ring 2 (Middle - 60%): BrandToFly, D2CBolt, B2BBolt */}
-            <motion.div
-              className="absolute rounded-full pointer-events-none"
+            {/* Ring 2 (Middle - 70%): BrandToFly, D2CBolt, B2BBolt */}
+            <div
+              className="absolute rounded-full pointer-events-none ring-container"
               style={{
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
-                width: '60%',
-                height: '60%',
-                transform: 'translate(-50%, -50%)',
+                width: '70%',
+                height: '70%',
                 borderRadius: '50%',
                 border: '1.5px solid rgba(99, 102, 241, 0.35)',
                 boxShadow: '0 0 20px rgba(99, 102, 241, 0.15), inset 0 0 20px rgba(99, 102, 241, 0.08)',
-              }}
-              animate={{
-                borderColor: ['rgba(99, 102, 241, 0.35)', 'rgba(139, 92, 246, 0.35)', 'rgba(99, 102, 241, 0.35)'],
-              }}
-              transition={{
-                borderColor: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+                animation: 'spin 55s linear infinite',
+                transformOrigin: 'center center',
               }}
             />
             
-            {/* Ring 3 (Outer - 90%): ScaleRunway, BoltRunway */}
-            <motion.div
-              className="absolute rounded-full pointer-events-none"
+            {/* Ring 3 (Outer - 95%): ScaleRunway, BoltRunway */}
+            <div
+              className="absolute rounded-full pointer-events-none ring-container"
               style={{
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
-                width: '90%',
-                height: '90%',
-                transform: 'translate(-50%, -50%)',
+                width: '95%',
+                height: '95%',
                 borderRadius: '50%',
                 border: '1.5px solid rgba(99, 102, 241, 0.3)',
                 boxShadow: '0 0 25px rgba(99, 102, 241, 0.12), inset 0 0 25px rgba(99, 102, 241, 0.06)',
-              }}
-              animate={{
-                borderColor: ['rgba(99, 102, 241, 0.3)', 'rgba(139, 92, 246, 0.3)', 'rgba(99, 102, 241, 0.3)'],
-              }}
-              transition={{
-                borderColor: { duration: 12, repeat: Infinity, ease: "easeInOut" },
+                animation: 'spin 65s linear infinite',
+                transformOrigin: 'center center',
               }}
             />
 
