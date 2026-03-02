@@ -89,9 +89,9 @@ const EcosystemOrbitalSection = () => {
         >
           {/* Inner Container with padding - All orbital elements MUST stay within this */}
           <div className="absolute inset-0" style={{ padding: '5%' }}>
-            {/* THE TRACKS: EXACTLY 3 Orbital Rings - ALL FIT INSIDE 100% */}
+            {/* THE TRACKS: EXACTLY 3 Orbital Rings - HIGHLY VISIBLE with glow */}
             {/* Ring 1 (Inner - 15%): BoltGuider */}
-            <div
+            <motion.div
               className="absolute rounded-full pointer-events-none"
               style={{
                 top: '50%',
@@ -99,11 +99,20 @@ const EcosystemOrbitalSection = () => {
                 width: '30%',
                 height: '30%',
                 transform: 'translate(-50%, -50%)',
-                border: '1px dashed rgba(148, 163, 184, 0.12)',
+                border: '1.5px solid rgba(99, 102, 241, 0.35)',
+                boxShadow: '0 0 15px rgba(99, 102, 241, 0.2), inset 0 0 15px rgba(99, 102, 241, 0.1)',
+              }}
+              animate={{
+                rotate: 360,
+                borderColor: ['rgba(99, 102, 241, 0.35)', 'rgba(139, 92, 246, 0.35)', 'rgba(99, 102, 241, 0.35)'],
+              }}
+              transition={{
+                rotate: { duration: 60, repeat: Infinity, ease: "linear" },
+                borderColor: { duration: 8, repeat: Infinity, ease: "easeInOut" },
               }}
             />
             {/* Ring 2 (Middle - 30%): BrandToFly, D2CBolt, B2BBolt */}
-            <div
+            <motion.div
               className="absolute rounded-full pointer-events-none"
               style={{
                 top: '50%',
@@ -111,11 +120,20 @@ const EcosystemOrbitalSection = () => {
                 width: '60%',
                 height: '60%',
                 transform: 'translate(-50%, -50%)',
-                border: '1px dashed rgba(148, 163, 184, 0.1)',
+                border: '1.5px solid rgba(99, 102, 241, 0.3)',
+                boxShadow: '0 0 20px rgba(99, 102, 241, 0.15), inset 0 0 20px rgba(99, 102, 241, 0.08)',
+              }}
+              animate={{
+                rotate: -360,
+                borderColor: ['rgba(99, 102, 241, 0.3)', 'rgba(139, 92, 246, 0.3)', 'rgba(99, 102, 241, 0.3)'],
+              }}
+              transition={{
+                rotate: { duration: 80, repeat: Infinity, ease: "linear" },
+                borderColor: { duration: 10, repeat: Infinity, ease: "easeInOut" },
               }}
             />
             {/* Ring 3 (Outer - 45%): ScaleRunway, BoltRunway */}
-            <div
+            <motion.div
               className="absolute rounded-full pointer-events-none"
               style={{
                 top: '50%',
@@ -123,9 +141,44 @@ const EcosystemOrbitalSection = () => {
                 width: '90%',
                 height: '90%',
                 transform: 'translate(-50%, -50%)',
-                border: '1px dashed rgba(148, 163, 184, 0.08)',
+                border: '1.5px solid rgba(99, 102, 241, 0.25)',
+                boxShadow: '0 0 25px rgba(99, 102, 241, 0.12), inset 0 0 25px rgba(99, 102, 241, 0.06)',
+              }}
+              animate={{
+                rotate: 360,
+                borderColor: ['rgba(99, 102, 241, 0.25)', 'rgba(139, 92, 246, 0.25)', 'rgba(99, 102, 241, 0.25)'],
+              }}
+              transition={{
+                rotate: { duration: 100, repeat: Infinity, ease: "linear" },
+                borderColor: { duration: 12, repeat: Infinity, ease: "easeInOut" },
               }}
             />
+
+            {/* Animated Background Particles */}
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={`particle-${i}`}
+                className="absolute rounded-full"
+                style={{
+                  width: `${Math.random() * 3 + 1}px`,
+                  height: `${Math.random() * 3 + 1}px`,
+                  background: 'rgba(99, 102, 241, 0.4)',
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  boxShadow: '0 0 4px rgba(99, 102, 241, 0.6)',
+                }}
+                animate={{
+                  opacity: [0.2, 0.8, 0.2],
+                  scale: [1, 1.5, 1],
+                }}
+                transition={{
+                  duration: Math.random() * 3 + 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
 
             {/* Rotating Track System - Enhanced timing: 45s (faster, more engaging) */}
             <motion.div
