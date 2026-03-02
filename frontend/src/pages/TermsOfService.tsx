@@ -216,21 +216,18 @@ const TermsOfService = () => {
 
         {/* Support CTA Button */}
         <div className="mt-16 flex justify-center">
-          <a
-            href="https://wa.me/917353913591"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => {
+              if (window.Intercom) {
+                window.Intercom('show');
+              }
+            }}
             data-testid="terms-support-button"
+            className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#1D1D1F] text-white text-sm font-semibold hover:bg-[#333336] transition-all duration-200 shadow-lg hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
           >
-            <motion.span
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#1D1D1F] text-white text-sm font-semibold hover:bg-[#333336] transition-colors duration-200 shadow-lg"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <MessageCircle className="w-4 h-4" />
-              Need Support? Chat with us
-            </motion.span>
-          </a>
+            <MessageCircle className="w-4 h-4" />
+            Need Support? Chat with us
+          </button>
         </div>
       </article>
     </div>
