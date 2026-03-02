@@ -180,18 +180,9 @@ const EcosystemOrbitalSection = () => {
               />
             ))}
 
-            {/* Rotating Track System - Enhanced timing: 45s (faster, more engaging) */}
-            <motion.div
-              className="absolute inset-0"
-              animate={isRotationPaused ? {} : { rotate: 360 }}
-              transition={{
-                duration: 45,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{ transformOrigin: "center center" }}
-            >
-              {/* Connection Lines from Center to Nodes - Enhanced colors */}
+            {/* Rotating Track System - No longer needed, nodes move independently */}
+            <div className="absolute inset-0">
+              {/* Connection Lines from Center to Nodes - Enhanced with data flow */}
               <svg 
                 className="absolute inset-0 w-full h-full pointer-events-none"
                 style={{ overflow: 'visible' }}
@@ -213,28 +204,65 @@ const EcosystemOrbitalSection = () => {
                       <feMergeNode in="SourceGraphic"/>
                     </feMerge>
                   </filter>
+                  
+                  {/* Gradient for data flow */}
+                  <linearGradient id="dataFlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="rgba(99, 102, 241, 0)" />
+                    <stop offset="50%" stopColor="rgba(99, 102, 241, 0.8)" />
+                    <stop offset="100%" stopColor="rgba(99, 102, 241, 0)" />
+                  </linearGradient>
                 </defs>
                 
                 {engines.map((engine, index) => {
                   const orbitRadius = engine.orbit === 1 ? 15 : engine.orbit === 2 ? 30 : 45;
-                  const pos = getOrbitalPosition(engine.angle, orbitRadius);
                   const isHovered = hoveredNode === index;
 
                   return (
-                    <line
-                      key={`line-${index}`}
-                      x1="50"
-                      y1="50"
-                      x2={pos.x}
-                      y2={pos.y}
-                      stroke={isHovered ? engine.color : 'rgba(99, 102, 241, 0.18)'}
-                      strokeWidth={isHovered ? '0.6' : '0.2'}
-                      style={{
-                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                        filter: isHovered ? 'url(#strongGlow)' : 'none',
-                        opacity: isHovered ? 1 : 0.6,
-                      }}
-                    />
+                    <g key={`line-group-${index}`}>
+                      {/* Static connection line */}
+                      <motion.line
+                        x1="50"
+                        y1="50"
+                        x2={50 + orbitRadius * Math.cos((engine.angle - 90) * Math.PI / 180)}
+                        y2={50 + orbitRadius * Math.sin((engine.angle - 90) * Math.PI / 180)}
+                        stroke={isHovered ? engine.color : 'rgba(99, 102, 241, 0.25)'}
+                        strokeWidth={isHovered ? '0.8' : '0.3'}
+                        animate={{
+                          strokeWidth: isHovered ? [0.8, 1.2, 0.8] : 0.3,
+                          opacity: isHovered ? [0.8, 1, 0.8] : 0.6,
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                        style={{
+                          filter: isHovered ? 'url(#strongGlow)' : 'url(#glow)',
+                        }}
+                      />
+                      
+                      {/* Animated data packet flowing along line */}
+                      {hasAnimated && (
+                        <motion.circle
+                          r="1.5"
+                          fill={engine.color}
+                          style={{
+                            filter: 'url(#strongGlow)',
+                          }}
+                          animate={{
+                            cx: [50, 50 + orbitRadius * Math.cos((engine.angle - 90) * Math.PI / 180)],
+                            cy: [50, 50 + orbitRadius * Math.sin((engine.angle - 90) * Math.PI / 180)],
+                            opacity: [0, 1, 1, 0],
+                          }}
+                          transition={{
+                            duration: 2.5 + index * 0.3,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: index * 0.5,
+                          }}
+                        />
+                      )}
+                    </g>
                   );
                 })}
               </svg>
