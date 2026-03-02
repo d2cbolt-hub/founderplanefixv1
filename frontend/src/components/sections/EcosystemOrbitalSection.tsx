@@ -224,15 +224,6 @@ const EcosystemOrbitalSection = () => {
                           ease: "linear",
                         }}
                       >
-                      {/* Counter-rotation wrapper - this cancels out parent rotation */}
-                      <motion.div
-                        animate={isRotationPaused ? {} : { rotate: -360 }}
-                        transition={{
-                          duration: 60,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                      >
                         <div className="flex flex-col items-center cursor-pointer group">
                           {/* Node Circle */}
                           <motion.div
