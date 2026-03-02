@@ -188,7 +188,7 @@ const EcosystemOrbitalSection = () => {
                 {/* Engine Nodes - Counter-rotating to stay upright */}
                 {engines.map((engine, index) => {
                   const Icon = engine.icon;
-                  const orbitRadius = engine.orbit === 1 ? 30 : engine.orbit === 2 ? 50 : 68;
+                  const orbitRadius = engine.orbit === 1 ? 28 : engine.orbit === 2 ? 48 : 68;
                   const pos = getOrbitalPosition(engine.angle, orbitRadius);
                   const isHovered = hoveredNode === index;
 
