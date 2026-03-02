@@ -423,29 +423,6 @@ const EcosystemOrbitalSection = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* CSS Keyframe Animation for Pulsating Glow */}
-      <style>{`
-        @keyframes pulsate-glow {
-          0%, 100% {
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 40px rgba(99, 102, 241, 0.2), 0 0 60px rgba(99, 102, 241, 0.1);
-          }
-          50% {
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(99, 102, 241, 0.4), 0 0 90px rgba(99, 102, 241, 0.2);
-          }
-        }
-        
-        .pulsating-glow {
-          animation: pulsate-glow 3s ease-in-out infinite;
-          background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
-        }
-
-        /* Ensure no stacking on mobile - responsive scaling */
-        @media (max-width: 768px) {
-          /* All positioning remains absolute and percentage-based */
-          /* The container scales down proportionally */
-        }
-      `}</style>
     </section>
   );
 };
