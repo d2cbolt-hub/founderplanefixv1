@@ -126,57 +126,64 @@ const EcosystemOrbitalSection = () => {
               }}
             />
 
-              {/* Rotating Track System */}
-              <motion.div
-                className="absolute inset-0"
-                animate={isRotationPaused ? {} : { rotate: 360 }}
-                transition={{
-                  duration: 60,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                style={{ transformOrigin: "center center" }}
+            {/* Rotating Track System - Enhanced timing: 45s (faster, more engaging) */}
+            <motion.div
+              className="absolute inset-0"
+              animate={isRotationPaused ? {} : { rotate: 360 }}
+              transition={{
+                duration: 45,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              style={{ transformOrigin: "center center" }}
+            >
+              {/* Connection Lines from Center to Nodes - Enhanced colors */}
+              <svg 
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                style={{ overflow: 'visible' }}
+                viewBox="0 0 100 100"
+                preserveAspectRatio="xMidYMid meet"
               >
-                {/* Connection Lines from Center to Nodes */}
-                <svg 
-                  className="absolute inset-0 w-full h-full pointer-events-none"
-                  style={{ overflow: 'visible' }}
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  <defs>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                      <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  
-                  {engines.map((engine, index) => {
-                    const orbitRadius = engine.orbit === 1 ? 30 : engine.orbit === 2 ? 50 : 68;
-                    const pos = getOrbitalPosition(engine.angle, orbitRadius);
-                    const isHovered = hoveredNode === index;
+                <defs>
+                  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                  <filter id="strongGlow" x="-100%" y="-100%" width="300%" height="300%">
+                    <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+                
+                {engines.map((engine, index) => {
+                  const orbitRadius = engine.orbit === 1 ? 28 : engine.orbit === 2 ? 48 : 68;
+                  const pos = getOrbitalPosition(engine.angle, orbitRadius);
+                  const isHovered = hoveredNode === index;
 
-                    return (
-                      <line
-                        key={`line-${index}`}
-                        x1="50"
-                        y1="50"
-                        x2={pos.x}
-                        y2={pos.y}
-                        stroke={isHovered ? engine.color : 'rgba(148, 163, 184, 0.15)'}
-                        strokeWidth={isHovered ? '0.4' : '0.15'}
-                        style={{
-                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                          filter: isHovered ? 'url(#glow)' : 'none',
-                          opacity: isHovered ? 1 : 0.5,
-                        }}
-                      />
-                    );
-                  })}
-                </svg>
+                  return (
+                    <line
+                      key={`line-${index}`}
+                      x1="50"
+                      y1="50"
+                      x2={pos.x}
+                      y2={pos.y}
+                      stroke={isHovered ? engine.color : 'rgba(99, 102, 241, 0.18)'}
+                      strokeWidth={isHovered ? '0.6' : '0.2'}
+                      style={{
+                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                        filter: isHovered ? 'url(#strongGlow)' : 'none',
+                        opacity: isHovered ? 1 : 0.6,
+                      }}
+                    />
+                  );
+                })}
+              </svg>
 
                 {/* Engine Nodes - Counter-rotating to stay upright */}
                 {engines.map((engine, index) => {
