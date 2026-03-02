@@ -17,6 +17,7 @@ import Admin from "./pages/Admin";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import RefundPolicy from "./pages/RefundPolicy";
+import BoltGuiderOnboarding from "./pages/BoltGuiderOnboarding";
 
 import PageTransition from "./components/PageTransition";
 
@@ -121,6 +122,14 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <RefundPolicy />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/boltguider-onboarding"
+          element={
+            <PageTransition>
+              <BoltGuiderOnboarding />
             </PageTransition>
           }
         />

@@ -20,7 +20,7 @@ const EcosystemOrbitalSection = () => {
             One Central Hub. Six Specialized Engines.
           </h2>
           <p className="text-slate-400 max-w-[720px] mx-auto text-base md:text-lg leading-relaxed">
-            FounderPlane operates as a unified architectural system. We are not a fragmented agency. We are your core operating system, allowing you to plug in the exact sub-brand engine you need, exactly when your stage requires it.
+            FounderPlane operates as a unified architectural system. We are not a fragmented agency. We are your core operating system, allowing you to plug in the exact execution engine you need, exactly when your stage requires it.
           </p>
         </div>
 

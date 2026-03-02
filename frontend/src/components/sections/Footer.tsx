@@ -123,6 +123,20 @@ const Footer = () => {
             <div>
               <h4 className="text-white font-semibold mb-6">Our Systems</h4>
               <ul className="space-y-3">
+                <li>
+                  <button
+                    onClick={() => {
+                      const stageClaritySection = document.getElementById('stage-clarity-section');
+                      if (stageClaritySection) {
+                        stageClaritySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                    className="text-slate-400 hover:text-primary transition-colors duration-300 text-sm relative inline-block group text-left"
+                  >
+                    Find Your Stage (Clarity Check)
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                  </button>
+                </li>
                 {services.map((service) => (
                   <li key={service.name}>
                     <Link 
