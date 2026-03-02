@@ -135,48 +135,6 @@ const EcosystemOrbitalSection = () => {
                 }}
                 style={{ transformOrigin: "center center" }}
               >
-
-                {/* Connection Lines from Center to Nodes */}
-                <svg 
-                  className="absolute inset-0 w-full h-full pointer-events-none"
-                  style={{ overflow: 'visible' }}
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  <defs>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                      <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  
-                  {engines.map((engine, index) => {
-                    const orbitRadius = engine.orbit === 1 ? 33 : engine.orbit === 2 ? 50 : 67;
-                    const pos = getOrbitalPosition(engine.angle, orbitRadius);
-                    const isHovered = hoveredNode === index;
-
-                    return (
-                      <line
-                        key={`line-${index}`}
-                        x1="50"
-                        y1="50"
-                        x2={pos.x}
-                        y2={pos.y}
-                        stroke={isHovered ? engine.color : 'rgba(148, 163, 184, 0.2)'}
-                        strokeWidth={isHovered ? '0.5' : '0.2'}
-                        style={{
-                          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                          filter: isHovered ? 'url(#glow)' : 'none',
-                          opacity: isHovered ? 1 : 0.6,
-                        }}
-                      />
-                    );
-                  })}
-                </svg>
-
                 {/* Connection Lines from Center to Nodes */}
                 <svg 
                   className="absolute inset-0 w-full h-full pointer-events-none"
